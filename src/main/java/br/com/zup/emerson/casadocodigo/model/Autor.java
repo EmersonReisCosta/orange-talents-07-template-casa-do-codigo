@@ -19,16 +19,22 @@ public class Autor {
     private String nome;
     @Email
     @NotBlank
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Column(length = 400)
     private String descricao;
 
-    @NotNull
+
     @CreationTimestamp
     private LocalDate instante;
 
-
+    public Autor(Long id, String nome, String email, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.descricao = descricao;
+    }
 
     public Long getId() {
         return id;
@@ -42,7 +48,5 @@ public class Autor {
     public String getDescricao() {
         return descricao;
     }
-    public LocalDate getInstante() {
-        return instante;
-    }
+
 }
