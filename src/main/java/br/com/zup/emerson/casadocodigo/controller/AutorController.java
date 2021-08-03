@@ -25,17 +25,6 @@ public class AutorController {
     @PostMapping
     public Autor cadastrarAutor(@RequestBody @Valid AutorForm autorForm, Errors errors){
         Autor autor = autorForm.converter();
-        validaEmail(autor, errors);
-        autorRepository.save(autor);
-        return autor;
-    }
-
-    public void validaEmail(Autor autor, Errors errors){
-
-        if (errors.hasErrors()){
-            return;
-        }
-
         Optional<Autor> emailExistente = autorRepository
                 .findByEmail(autor.getEmail());
 
@@ -44,6 +33,9 @@ public class AutorController {
                     "Já existe um(a) outro(a) autor(a) com o mesmo email "
                             + autor.getEmail());
         }
+        autorRepository.save(autor);
+        return autor;
     }
+
 
 }
