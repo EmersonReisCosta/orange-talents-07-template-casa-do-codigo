@@ -29,7 +29,7 @@ public class AutorController {
         Optional<Autor> emailExistente = autorRepository
                 .findByEmail(autor.getEmail());
 
-        if(emailExistente != null && !emailExistente.equals(autor)) {
+        if(emailExistente != null && emailExistente.equals(autor)) {
             throw new NegocioException("Já existe um usuário com esse Email cadastrado!");
         }
         autorRepository.save(autor);
