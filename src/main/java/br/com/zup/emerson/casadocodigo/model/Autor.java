@@ -29,8 +29,12 @@ public class Autor {
     @CreationTimestamp
     private LocalDate instante;
 
-    public Autor(Long id, String nome, String email, String descricao) {
-        this.id = id;
+    @Deprecated
+    public Autor() {
+    }
+
+    public Autor(String nome, String email, String descricao) {
+
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

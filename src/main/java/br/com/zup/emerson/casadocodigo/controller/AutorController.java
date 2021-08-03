@@ -1,6 +1,7 @@
 package br.com.zup.emerson.casadocodigo.controller;
 
 import br.com.zup.emerson.casadocodigo.controller.dto.AutorDto;
+import br.com.zup.emerson.casadocodigo.exception.NegocioException;
 import br.com.zup.emerson.casadocodigo.model.Autor;
 import br.com.zup.emerson.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,13 @@ public class AutorController {
 
 
     @PostMapping
-    public Autor cadastrarAutor(@RequestBody @Valid AutorForm autorForm, Errors errors){
+    public Autor cadastrarAutor(@RequestBody @Valid AutorForm autorForm){
         Autor autor = autorForm.converter();
         Optional<Autor> emailExistente = autorRepository
                 .findByEmail(autor.getEmail());
 
         if(emailExistente != null && !emailExistente.equals(autor)) {
-            errors.rejectValue("email", null,
-                    "Já existe um(a) outro(a) autor(a) com o mesmo email "
-                            + autor.getEmail());
+            throw new NegocioException("Já existe um usuário com esse Email cadastrado!");
         }
         autorRepository.save(autor);
         return autor;
