@@ -1,11 +1,10 @@
 package br.com.zup.emerson.casadocodigo.controller;
 
-import br.com.zup.emerson.casadocodigo.controller.dto.CategoriaForm;
 import br.com.zup.emerson.casadocodigo.exception.NegocioException;
+import br.com.zup.emerson.casadocodigo.model.Categoria;
 import br.com.zup.emerson.casadocodigo.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

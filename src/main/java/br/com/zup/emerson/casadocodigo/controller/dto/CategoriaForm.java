@@ -1,6 +1,6 @@
 package br.com.zup.emerson.casadocodigo.controller.dto;
 
-import br.com.zup.emerson.casadocodigo.controller.Categoria;
+import br.com.zup.emerson.casadocodigo.model.Categoria;
 
 import javax.validation.constraints.NotBlank;
 

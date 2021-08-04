@@ -1,4 +1,4 @@
-package br.com.zup.emerson.casadocodigo.controller;
+package br.com.zup.emerson.casadocodigo.controller.dto;
 
 import br.com.zup.emerson.casadocodigo.model.Autor;
 
