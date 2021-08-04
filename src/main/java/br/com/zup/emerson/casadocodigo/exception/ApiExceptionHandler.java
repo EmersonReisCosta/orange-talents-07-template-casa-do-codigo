@@ -6,13 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NegocioException.class)
@@ -30,8 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         var problema = new Problema();
         problema.setStatus(status.value());
-        problema.setDescricao("Um ou mais campos estão invalidos! "
-                +"Faça o preenchimento correto e tente novamente.");
+        problema.setDescricao("Um ou mais campos estão invalidos! ");
         return super.handleExceptionInternal(ex, problema,headers, status, request);
     }
 }

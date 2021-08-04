@@ -1,5 +1,7 @@
 package br.com.zup.emerson.casadocodigo.controller;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -13,7 +15,7 @@ public class Categoria {
     @Column(unique = true)
     private String nome;
 
-    public Categoria(String nome) {
+    public Categoria(@NotBlank String nome) {
         this.nome = nome;
     }
 
