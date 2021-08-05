@@ -1,6 +1,7 @@
 package br.com.zup.emerson.casadocodigo.controller.dto;
 
 import br.com.zup.emerson.casadocodigo.model.Autor;
+import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -13,6 +14,7 @@ public class AutorForm {
     private String nome;
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
     @NotBlank
     @Size(max = 400)

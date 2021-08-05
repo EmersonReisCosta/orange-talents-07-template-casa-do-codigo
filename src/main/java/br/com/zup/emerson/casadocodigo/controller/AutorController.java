@@ -6,9 +6,11 @@ import br.com.zup.emerson.casadocodigo.model.Autor;
 import br.com.zup.emerson.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -20,15 +22,10 @@ public class AutorController {
 
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarAutor(@RequestBody @Validated AutorForm autorForm){
+    @Transactional
+    public ResponseEntity<Void> cadastrarAutor(@RequestBody @Valid AutorForm autorForm){
         Autor autor = autorForm.converter();
-        Optional<Autor> emailExistente = autorRepository
-                .findByEmail(autor.getEmail());
 
-        if(emailExistente != null && !emailExistente.equals(autor)) {
-
-            throw new NegocioException("Já existe um usuário com esse Email cadastrado!");
-        }
         autorRepository.save(autor);
         return ResponseEntity.ok().build();
     }

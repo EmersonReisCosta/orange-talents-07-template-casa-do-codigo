@@ -1,37 +1,43 @@
 package br.com.zup.emerson.casadocodigo.exception;
 
 
-import org.springframework.http.HttpHeaders;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
-public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
-        var status = HttpStatus.BAD_REQUEST;
-        var problema = new Problema();
-        problema.setStatus(status.value());
-        problema.setDescricao(ex.getMessage());
+import java.util.ArrayList;
+import java.util.List;
 
-        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+@RestControllerAdvice
+public class ApiExceptionHandler {
+    private final MessageSource messageSource;
+
+    public ApiExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
-        var problema = new Problema();
-        problema.setStatus(status.value());
-        problema.setDescricao("Um ou mais campos estão invalidos! ");
-        return super.handleExceptionInternal(ex, problema,headers, status, request);
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public List<Problema> handler(MethodArgumentNotValidException exception) {
+        List<Problema> erros = new ArrayList<>();
+
+        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+        fieldErrors.forEach(e -> {
+            String mensagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
+            Problema erro = new Problema(e.getField(), mensagem);
+            erros.add(erro);
+        });
+
+        return erros;
     }
 }

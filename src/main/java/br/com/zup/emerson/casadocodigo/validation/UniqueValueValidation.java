@@ -1,5 +1,7 @@
 package br.com.zup.emerson.casadocodigo.validation;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,6 +29,7 @@ public boolean isValid(String value, ConstraintValidatorContext constraintValida
         Query query = entityManager.createQuery("SELECT 1 FROM " + classe.getName() + " WHERE " + atributo + " = :value");
         query.setParameter("value", value);
         List<?> lista = query.getResultList();
+        Assert.state(lista.size() <= 1, "Foi encontrada mais de uma "+classe+" com o atributo "+atributo+" = "+ value);
         return lista.isEmpty();
         }
 }

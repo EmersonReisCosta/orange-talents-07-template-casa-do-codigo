@@ -11,7 +11,8 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
 public @interface UniqueValue {
-    public String message() default "O campo deve ser unico";
+    public String message() default "{br.com.zup.emerson.casadocodigo.validation.uniquevalue}";
+
     public Class<?>[] groups() default {};
     public Class<? extends Payload>[] payload() default{};
     String fieldName();

@@ -1,20 +1,22 @@
 package br.com.zup.emerson.casadocodigo.exception;
 
 public class Problema {
-    private Integer status;
-    private String descricao;
 
-    public Integer getStatus() {
-        return status;
+    private String campo;
+
+    private String erro;
+
+    public Problema(String campo, String erro) {
+        this.campo = campo;
+        this.erro = erro;
     }
-    public void setStatus(Integer status) {
-        this.status = status;
+
+    public String getCampo() {
+        return campo;
     }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+
+    public String getErro() {
+        return erro;
     }
 
 }
