@@ -2,14 +2,12 @@ package br.com.zup.emerson.casadocodigo.validation;
 
 import javax.validation.Constraint;
 import java.lang.annotation.*;
-import java.lang.reflect.Field;
 
-import javax.validation.Constraint;
 import javax.validation.Payload;
 
 
 @Documented
-@Constraint()
+@Constraint(validatedBy = UniqueValueValidation.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
 public @interface UniqueValue {
