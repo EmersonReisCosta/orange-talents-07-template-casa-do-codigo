@@ -21,12 +21,9 @@ public class CategoriaController {
     CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public ResponseEntity<Categoria> cadastraCategoria(@RequestBody @Valid Categoria categoria){
-//        Categoria categoria = form.converter();
-        Optional<Categoria> verificaNome = categoriaRepository.findByNome(categoria.getNome());
-        if (verificaNome != null && !verificaNome.equals(categoria.getNome())){
-            throw new NegocioException("A categoria já está cadastrada!");
-        }
+    public ResponseEntity<Categoria> cadastraCategoria(@RequestBody @Valid Categoria form){
+        Categoria categoria = new Categoria(form.getNome());
+
         categoriaRepository.save(categoria);
         return ResponseEntity.ok().body(categoria);
     }

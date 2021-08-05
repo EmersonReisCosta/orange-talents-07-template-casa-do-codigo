@@ -15,8 +15,8 @@ public class Categoria {
     @Column(unique = true)
     private String nome;
 
-    public Categoria(Long id, @NotBlank String nome) {
-        this.id = id;
+    public Categoria(@NotBlank String nome) {
+
         this.nome = nome;
     }
 

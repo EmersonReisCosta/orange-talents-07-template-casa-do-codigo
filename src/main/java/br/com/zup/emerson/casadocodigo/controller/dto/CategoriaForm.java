@@ -1,19 +1,19 @@
 package br.com.zup.emerson.casadocodigo.controller.dto;
 
 import br.com.zup.emerson.casadocodigo.model.Categoria;
+import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaForm {
 
-    private Long id;
-
     @NotBlank
+    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
-    public CategoriaForm(Long id, @NotBlank String nome) {
-        this.id = id;
+    public CategoriaForm( @NotBlank String nome) {
+
         this.nome = nome;
     }
 
@@ -25,11 +25,4 @@ public class CategoriaForm {
         return nome;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Categoria converter(){
-        return new Categoria(this.id ,this.nome);
-    }
 }
