@@ -1,5 +1,6 @@
 package br.com.zup.emerson.casadocodigo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -7,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Autor {
@@ -24,6 +27,10 @@ public class Autor {
     @NotBlank
     @Column(length = 400)
     private String descricao;
+    //    O Json Ignore resolve o problema de recursividade do código.
+    @JsonIgnore
+    @OneToMany(mappedBy = "autor")
+    private List<Livro> livros = new ArrayList<>();
 
 
     @CreationTimestamp

@@ -1,10 +1,10 @@
 package br.com.zup.emerson.casadocodigo.model;
 
-import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -18,13 +18,30 @@ public class Livro {
     @Column(unique = true)
     private String titulo;
     @Size(max = 500)
+    @NotBlank
     private String resumo;
-    @Column()
+    @NotBlank
     private String sumario;
+    @NotNull
+    @Min(20)
     private BigDecimal preco;
-    private Integer pagina;
+    @Min(100)
+    private Integer numeroPaginas;
+    @NotBlank
     private String isnb;
+    @Future
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataPublicação;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "autorId")
+    private Autor autor;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "categoriaId")
+    private Categoria categoria;
 
 
 

@@ -1,9 +1,12 @@
 package br.com.zup.emerson.casadocodigo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Categoria {
@@ -14,6 +17,10 @@ public class Categoria {
     @NotBlank
     @Column(unique = true)
     private String nome;
+    //    O Json Ignore resolve o problema de recursividade do código.
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria")
+    private List<Livro> livros = new ArrayList<>();
 
     public Categoria(@NotBlank String nome) {
 
