@@ -5,6 +5,7 @@ import br.com.zup.emerson.casadocodigo.model.Categoria;
 import br.com.zup.emerson.casadocodigo.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/categorias")
+@Validated
 public class CategoriaController {
 
     @Autowired

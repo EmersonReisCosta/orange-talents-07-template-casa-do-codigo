@@ -3,7 +3,7 @@ package br.com.zup.emerson.casadocodigo.controller.dto;
 import br.com.zup.emerson.casadocodigo.model.Categoria;
 import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 
-import javax.persistence.Id;
+
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaForm {

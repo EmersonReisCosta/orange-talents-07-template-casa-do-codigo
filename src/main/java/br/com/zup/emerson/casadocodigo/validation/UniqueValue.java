@@ -1,20 +1,27 @@
 package br.com.zup.emerson.casadocodigo.validation;
 
 import javax.validation.Constraint;
-import java.lang.annotation.*;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
 
 import javax.validation.Payload;
 
 
 @Documented
-@Constraint(validatedBy = UniqueValueValidation.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Constraint(validatedBy = {UniqueValueValidator.class})
+@Target({ FIELD})
+@Retention(RUNTIME)
 public @interface UniqueValue {
-    public String message() default "{br.com.zup.emerson.casadocodigo.validation.uniquevalue}";
 
-    public Class<?>[] groups() default {};
-    public Class<? extends Payload>[] payload() default{};
+    String message() default "{br.com.zup.emerson.beanvalidation.uniquevalue}";
+    Class<?>[] groups() default { };
+    Class<? extends Payload>[] payload() default { };
     String fieldName();
     Class<?> domainClass();
 }
