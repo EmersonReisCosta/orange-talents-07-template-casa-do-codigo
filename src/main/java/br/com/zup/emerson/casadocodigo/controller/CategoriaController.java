@@ -1,6 +1,6 @@
 package br.com.zup.emerson.casadocodigo.controller;
 
-import br.com.zup.emerson.casadocodigo.exception.NegocioException;
+//import br.com.zup.emerson.casadocodigo.exception.NegocioException;
 import br.com.zup.emerson.casadocodigo.model.Categoria;
 import br.com.zup.emerson.casadocodigo.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

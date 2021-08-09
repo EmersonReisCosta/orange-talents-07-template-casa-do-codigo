@@ -4,6 +4,9 @@ import br.com.zup.emerson.casadocodigo.model.Categoria;
 import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 
 
+import javax.annotation.ManagedBean;
+import javax.persistence.EntityManager;
+import javax.swing.text.html.parser.Entity;
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaForm {
