@@ -6,19 +6,35 @@ import br.com.zup.emerson.casadocodigo.repository.LivroRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LivroDto {
 
     private Long id;
     private String titulo;
 
-    public void converter(List<Livro> livros) {
-       
-                                                          
+    public LivroDto(Long id, String titulo) {
+        this.id = id;
+        this.titulo = titulo;
     }
 
-    public LivroDto(Livro livro) {
-        this.id = livro.getId();
-        this.titulo = livro.getTitulo();
+
+
+    public static List<LivroDto> converter(List<Livro> livros) {
+        List<LivroDto> livroDtos = new ArrayList<>();
+        livroDtos.addAll(livros.stream().map(livro -> new LivroDto(livro.getId(), livro.getTitulo())).collect(Collectors.toList()));
+        return livroDtos;
+    }
+
+    @Deprecated
+    public LivroDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 }

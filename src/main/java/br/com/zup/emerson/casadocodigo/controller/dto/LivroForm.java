@@ -8,7 +8,6 @@ import br.com.zup.emerson.casadocodigo.repository.CategoriaRepository;
 import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
