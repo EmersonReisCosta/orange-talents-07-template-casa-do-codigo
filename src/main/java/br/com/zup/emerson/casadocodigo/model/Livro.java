@@ -25,13 +25,15 @@ public class Livro {
     @NotNull
     @Min(20)
     private BigDecimal preco;
+    @NotNull
     @Min(100)
     private Integer numeroPaginas;
     @NotBlank
     private String isnb;
+    @NotNull
     @Future
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-    private LocalDate dataPublicação;
+    private LocalDate dataPublicacao;
 
     @NotNull
     @ManyToOne
@@ -43,6 +45,16 @@ public class Livro {
     @JoinColumn(name = "categoriaId")
     private Categoria categoria;
 
+    public Livro( String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isnb, LocalDate dataPublicacao, Autor autor, Categoria categoria) {
 
-
+        this.titulo = titulo;
+        this.resumo = resumo;
+        this.sumario = sumario;
+        this.preco = preco;
+        this.numeroPaginas = numeroPaginas;
+        this.isnb = isnb;
+        this.dataPublicacao = dataPublicacao;
+        this.autor = autor;
+        this.categoria = categoria;
+    }
 }
