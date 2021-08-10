@@ -12,17 +12,20 @@ public class Pais {
     private Long id;
 
     @NotBlank
-    private String nomeEstado;
+    private String nomePais;
 
     @OneToMany(mappedBy = "pais")
     private List<Estado> estados = new ArrayList<>();
 
-    public Pais(String nomeEstado, List<Estado> estados) {
-        this.nomeEstado = nomeEstado;
-        this.estados = estados;
+    public Pais(String nomePais) {
+        this.nomePais = nomePais;
     }
 
     @Deprecated
     public Pais() {
+    }
+
+    public String getNomePais() {
+        return nomePais;
     }
 }
