@@ -28,4 +28,12 @@ public class Estado {
     @Deprecated
     public Estado() {
     }
+
+    public String getNomeEstado() {
+        return nomeEstado;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
 }

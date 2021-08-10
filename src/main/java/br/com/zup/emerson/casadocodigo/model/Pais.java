@@ -1,5 +1,7 @@
 package br.com.zup.emerson.casadocodigo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class Pais {
     @NotBlank
     private String nomePais;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pais")
     private List<Estado> estados = new ArrayList<>();
 
