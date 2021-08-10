@@ -30,11 +30,6 @@ public class LivroDto {
     public LivroDto() {
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getTitulo() {
-        return titulo;
-    }
+
 }
