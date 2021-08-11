@@ -4,7 +4,6 @@ import br.com.zup.emerson.casadocodigo.controller.dto.EstadoForm;
 import br.com.zup.emerson.casadocodigo.model.Estado;
 import br.com.zup.emerson.casadocodigo.repository.EstadoRepository;
 import br.com.zup.emerson.casadocodigo.repository.PaisRepository;
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +23,10 @@ public class EstadoController {
     EstadoRepository estadoRepository;
 
     @PostMapping
-    public ResponseEntity<Void> cadastraEstado(@RequestBody @Valid EstadoForm form){
+    public ResponseEntity<Estado> cadastraEstado(@RequestBody @Valid EstadoForm form){
         Estado estado = form.converter(paisRepository);
 
         estadoRepository.save(estado);
-        System.out.println("TESTE");
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(estado);
     }
 }
