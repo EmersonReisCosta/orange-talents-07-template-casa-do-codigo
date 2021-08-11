@@ -1,10 +1,15 @@
 package br.com.zup.emerson.casadocodigo.controller.dto;
 
+import br.com.zup.emerson.casadocodigo.model.Autor;
 import br.com.zup.emerson.casadocodigo.model.Estado;
 import br.com.zup.emerson.casadocodigo.model.Pais;
+import br.com.zup.emerson.casadocodigo.repository.EstadoRepository;
+import br.com.zup.emerson.casadocodigo.repository.PaisRepository;
 import br.com.zup.emerson.casadocodigo.validation.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 public class EstadoForm {
 
@@ -14,9 +19,9 @@ public class EstadoForm {
 
     private Pais pais;
 
-    public EstadoForm(Estado estado) {
-        this.nomeEstado = estado.getNomeEstado();
-        this.pais = estado.getPais();
+    public EstadoForm(String nomeEstado, Pais pais) {
+        this.nomeEstado = nomeEstado;
+        this.pais = pais;
     }
 
     @Deprecated
@@ -29,5 +34,12 @@ public class EstadoForm {
 
     public Pais getPais() {
         return pais;
+    }
+
+    public Estado converter(PaisRepository paisRepository){
+        Optional<Pais> paisObj = paisRepository.findById(this.pais.getId());
+
+        @NotNull Pais pais = paisObj.get();
+        return new Estado(this.nomeEstado, this.pais);
     }
 }

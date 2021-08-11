@@ -31,4 +31,12 @@ public class Pais {
     public String getNomePais() {
         return nomePais;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void adicionaEstado(Estado estado) {
+        this.estados.add(estado);
+    }
 }
