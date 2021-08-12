@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
     Optional<Estado> findByNomeEstadoAndPaisId(String nomeEstado, Long id);
+
+    Optional<Estado> findByIdAndPaisId(Long estadoId, Long paisId);
 }
